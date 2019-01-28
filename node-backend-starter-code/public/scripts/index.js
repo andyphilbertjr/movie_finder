@@ -7,7 +7,7 @@ const results = document.querySelector('.results')
 
 form.addEventListener('submit' ,function(e){
   e.preventDefault()
-  console.log(url + 's=' + form.querySelector('input').value)
+  results.innerHTML = ''
   fetch(url + 's=' + form.querySelector('input').value)
   .then( response => response.json() )
   .then( data => {
