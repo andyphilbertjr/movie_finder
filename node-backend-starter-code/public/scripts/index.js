@@ -39,5 +39,5 @@ form.addEventListener('submit' ,function(e){
       )
     })
   })
-
+})
   // movies.addEventListener('onload')
