@@ -14,20 +14,32 @@ h1{
 }
 
 .input{
+  border-color: #e2d3aa;
   border-radius: 10px;
   font-size: 1.5em;
   line-height: 10vh;
-  width: 100%;
+  width: 80vw;
 }
+.submit{
+  background-color: #00a330;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1.5em;
+  height: 10vh;
+}
+
 form label{
   font-size: 1.5em;
 }
 form{
   background-color: #e2d3aa;
+  padding: 20px;
 }
 .results{
   display: flex;
+  flex-flow: row wrap;
 }
 .movies{
   margin: 10px;
+  width: 30vw;
 }
