@@ -2,42 +2,38 @@ const Api_Key = 'cd37cf2f'
 let url = `http://www.omdbapi.com/?apikey=${Api_Key}&`
 const form = document.querySelector('form')
 const results = document.querySelector('.results')
-//
+const movies = document.querySelectorAll('.movies')
 
-// function dipslayMovieDetails(){
-  
-//   document.querySelectorAll('.movies').addEventListener('click', function(e){
-//     console.log(e.target.value.imdbID.value)
-//     e.preventDefault()
-//     fetch(`${url}i=${e.target.imdbID.value}` ).
-//     then(response => response.json()).
-//     then( data => {
-//       movies.insertAdjacentHTML('beforeend'
-//       `<div class='movieDetails'>${data.Plot}<div>`
-//      )
-//     }) 
-//   })
-// }
+function displayMovieDetails(key){
+  document.getElementById(key).addEventListener('click', function(){
+    console.log(key)
+    fetch(`${url}i=${key}` ).
+    then(response => response.json()).
+    then( data => {
+      document.getElementById(key).insertAdjacentHTML('beforeend',
+      `<div class='movieDetails'>${data.Plot}<div>`
+     )
+    }) 
+  })
+}
 
-//wrap function in objects // make calls from the object making it privat
-form.addEventListener('submit' ,function(e){
-  e.preventDefault()
-
+//wrap function in objects // make calls from the object making it private
+form.addEventListener('submit' ,function(){
   results.innerHTML = ''
   fetch(url + 's=' + form.querySelector('input').value)
   .then( response => response.json() )
   .then( data => {
     return data.Search.map( (movie, key) => {
+      key = movie.imdbID
       results.insertAdjacentHTML('afterbegin',
       `
-        <div class='movies'>
+        <div id=${key} onclick='displayMovieDetails("${key}")'class='movies'>
         <h1>${movie.Title}</h1>
-        <img class='poster' src=${movie.Poster} />
-        <p>${movie.Year}, Imdb ID: ${movie.imdbID}</p>
+        <img class='poster' src=${movie.Poster}>
+        <p id=${key}>${movie.Year}, Imdb ID: ${key}</p>
         </div>
       `
       )
     })
   })
 })
-  // movies.addEventListener('onload')
