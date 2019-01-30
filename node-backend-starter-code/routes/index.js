@@ -1,16 +1,18 @@
-const express = require('express');
+const express = require('express')
 const router = express.Router();
-const cookieParser = require("cookie-parser");
+const path = require('path')
 const db = require('../data.json');
 const fs = require('fs');
 
+
+
 router.post('/favorites', function(req, res){
-  console.log(req.body)
-  if(!req.body.name || !req.body.oid){
+  if(!req.body.Title || !req.body.imdbID){
     res.send("Error");
     return
   }
-  var data = JSON.parse(fs.readFileSync('./data.json'));
+  console.log('works here')
+  var data = JSON.parse(fs.readFileSync('../data.json'));
   data.push(req.body);
   fs.writeFile('./data.json', JSON.stringify(data));
   res.setHeader('Content-Type', 'application/json');

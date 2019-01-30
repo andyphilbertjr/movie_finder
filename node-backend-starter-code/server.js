@@ -18,13 +18,15 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'views')))
 
 //route handlers
 app.use('/', indexRouter)
 
-
-//server
+//views
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'html')
+//start server
 app.set('port', process.env.PORT || 3000)
 let server = app.listen(app.get('port'), () => {
     console.log( `server running localhost:${ app.get( 'port' ) }` );
@@ -40,23 +42,3 @@ app.use(function (err, request, response , next) {
 })
 
 module.exports = app
-
-// app.post('/favorites', function(req, res){
-//   // console.log(req.body.name)
-//   // if(!req.body.name || !req.body.oid){
-//   //   res.send("Error");
-//   //   return
-//   // }
-//   var data = JSON.parse(fs.readFileSync('./data.json'));
-//   data.push(req.body.movie);
-//   fs.writeFile('./data.json', JSON.stringify(data));
-//   res.setHeader('Content-Type', 'application/json');
-//   res.send(data);
-
-// });
-
-// app.get('/favorites', function(req, res){
-//   var data = fs.readFileSync('./data.json');
-//   res.setHeader('Content-Type', 'application/json');
-//   res.send(data);
-// });

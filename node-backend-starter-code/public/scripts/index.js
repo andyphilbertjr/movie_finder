@@ -27,7 +27,7 @@ form.addEventListener('submit' ,function(e){
       results.insertAdjacentHTML('afterbegin',
         displayResults(movie.Title, movie.Poster, movie.imdbID, movie.Year)
       )
-      addFave(data)
+      addFave(movie)
     })
   })
 })
@@ -37,12 +37,9 @@ function addFave(data = ``){
     return fetch("/favorites", {
             method: "POST",
             headers: { "Content-Type": "application/json; charset=utf-8" },
-            body: JSON.stringify({
-              name: data.Search.Title,
-              oid: data.Search.name
-            })
+            body: JSON.stringify(data)
           })
-        })        
+        })    
 }
 
 function displayResults(title, poster, oid, year){
