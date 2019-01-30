@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.get('/', express.static(path.join(__dirname, 'public')));
 
 app.post('/favorites', function(req, res){
-  console.log(req.body)
+  console.log(res.body.name)
   if(!req.body.name || !req.body.oid){
     res.send("Error");
     return

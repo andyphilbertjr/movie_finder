@@ -6,16 +6,13 @@ const movies = document.querySelectorAll('.movies')
 
 
 function displayMovieDetails(key){
-  document.getElementById(key).addEventListener('click', function(){
-    fetch(`${url}i=${key}` ).
-    then(response => response.json()).
-    then( data => {
-      document.getElementById(key).insertAdjacentHTML('beforeend',
-      `<div class='movieDetails'>${data.Plot}<div>`
-     )
-     addFave(data)
-    }) 
-  })
+  return fetch(`${url}i=${key}`)
+          .then(response => response.json())
+          .then( data => {
+            document.getElementById('details').insertAdjacentHTML('beforeend',
+            `<div class='movieDetails'>${data.Plot}<div>`
+            )
+          })
 }
 
 //wrap function in objects // make calls from the object making it private
@@ -35,25 +32,32 @@ form.addEventListener('submit' ,function(e){
       key = movie.oid
       results.insertAdjacentHTML('afterbegin',
       `
-        <div id=${movie.oid} onclick='displayMovieDetails("${movie.oid}")'class='movies'>
-        <h1>${movie.name}</h1>
-        <button class="favorite" id=${key}'>Fave<button>
-        <img class='poster' src=${movie.poster}>
-        <p>${movie.year}, Imdb ID: ${movie.oid}</p>
+        <div class='movies'>
+          <div class='movieHeader'>
+            <h1>${movie.name}</h1>
+            <button id="favorite" value=${movie}> Fave</button>
+            <img class='poster' src=${movie.poster}>
+          </div>
+          <div  id='details'>
+            <button onclick='displayMovieDetails("${movie.oid}")'>
+              Click here for more details.
+            </button>
+            <p>${movie.year}, Imdb ID: ${movie.oid}</p>
+          <div>
         </div>
       `
       )
+      addFave(movie)
     })
   })
 })
 
-function addFave(data){
-  document.querySelectorAll('.favorite')[0]
-  .addEventListener('click', function(){
+function addFave(data = ``){
+  document.getElementById('favorite').addEventListener('click', () => {
     fetch('/favorites', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-    })
+      'method': 'POST',
+      'body': JSON.stringify(data)
+    }).then(response => response.json())
+  })        
 }
 
