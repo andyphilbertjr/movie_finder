@@ -24,10 +24,10 @@ form.addEventListener('submit' ,function(e){
   .then( data => {
     return data.Search.map( (movie, key) => {
       movie = {
-        'name': `${movie.Title}`, 
-        'oid': `${movie.imdbID}`,
-        'year': `${movie.Year}`,
-        'poster': `${movie.Poster}`
+        name: `${movie.Title}`, 
+        oid: `${movie.imdbID}`,
+        year: `${movie.Year}`,
+        poster: `${movie.Poster}`
       }
       key = movie.oid
       results.insertAdjacentHTML('afterbegin',
@@ -54,10 +54,14 @@ form.addEventListener('submit' ,function(e){
 
 function addFave(data = ``){
   document.getElementById('favorite').addEventListener('click', () => {
-    fetch('/favorites', {
-      'method': 'POST',
-      'body': JSON.stringify(data)
-    }).then(response => response.json())
-  })        
+    return fetch('/favorites', {
+            method: 'POST',
+            body: JSON.stringify(data), 
+            header: {
+              'Content-Type': 'application/json'
+            }
+          }).then( response => response.json())
+            .then( response => JSON.stringify(response))
+        })        
 }
 

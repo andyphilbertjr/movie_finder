@@ -1,39 +1,62 @@
-const express = require('express');
-const app = express();
-const fs = require('fs');
-const path = require('path');
+//creates express app
+const express = require('express')
+const app = express()
+
+//access file system
+const fs = require('fs')
+const path = require('path')
+
+//middleware
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const indexRouter = require('./routes/index')
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
-app.get('/', express.static(path.join(__dirname, 'public')));
+//middleware for request handling chain
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.post('/favorites', function(req, res){
-  console.log(res.body.name)
-  if(!req.body.name || !req.body.oid){
-    res.send("Error");
-    return
-  }
-  var data = JSON.parse(fs.readFileSync('./data.json'));
-  data.push(req.body);
-  fs.writeFile('./data.json', JSON.stringify(data));
-  res.setHeader('Content-Type', 'application/json');
-  res.send(data);
+//route handlers
+app.use('/', indexRouter)
 
+
+//server
+app.set('port', process.env.PORT || 3000)
+let server = app.listen(app.get('port'), () => {
+    console.log( `server running localhost:${ app.get( 'port' ) }` );
 });
 
-app.get('/favorites', function(req, res){
-  var data = fs.readFileSync('./data.json');
-  res.setHeader('Content-Type', 'application/json');
-  res.send(data);
-});
+app.use(function (err, request, response , next) {
+    response.locals.message = err.message
+    response.locals.error = request.app.get('env') === 'development' ? err : {};
 
-
-
-app.listen(3000, function(){
-  return console.log("Listening on port 3000")
+    //show error page
+    response.status(err.status || 500)
+    response.render('error')
 })
 
 module.exports = app
+
+// app.post('/favorites', function(req, res){
+//   // console.log(req.body.name)
+//   // if(!req.body.name || !req.body.oid){
+//   //   res.send("Error");
+//   //   return
+//   // }
+//   var data = JSON.parse(fs.readFileSync('./data.json'));
+//   data.push(req.body.movie);
+//   fs.writeFile('./data.json', JSON.stringify(data));
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(data);
+
+// });
+
+// app.get('/favorites', function(req, res){
+//   var data = fs.readFileSync('./data.json');
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(data);
+// });
