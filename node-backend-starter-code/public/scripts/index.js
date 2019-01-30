@@ -23,45 +23,42 @@ form.addEventListener('submit' ,function(e){
   .then( response => response.json() )
   .then( data => {
     return data.Search.map( (movie, key) => {
-      movie = {
-        name: `${movie.Title}`, 
-        oid: `${movie.imdbID}`,
-        year: `${movie.Year}`,
-        poster: `${movie.Poster}`
-      }
       key = movie.oid
       results.insertAdjacentHTML('afterbegin',
-      `
-        <div class='movies'>
-          <div class='movieHeader'>
-            <h1>${movie.name}</h1>
-            <button id="favorite" value=${movie}> Fave</button>
-            <img class='poster' src=${movie.poster}>
-          </div>
-          <div  id='details'>
-            <button onclick='displayMovieDetails("${movie.oid}")'>
-              Click here for more details.
-            </button>
-            <p>${movie.year}, Imdb ID: ${movie.oid}</p>
-          <div>
-        </div>
-      `
+        displayResults(movie.Title, movie.Poster, movie.imdbID, movie.Year)
       )
-      addFave(movie)
+      addFave(data)
     })
   })
 })
 
 function addFave(data = ``){
   document.getElementById('favorite').addEventListener('click', () => {
-    return fetch('/favorites', {
-            method: 'POST',
-            body: JSON.stringify(data), 
-            header: {
-              'Content-Type': 'application/json'
-            }
-          }).then( response => response.json())
-            .then( response => JSON.stringify(response))
+    return fetch("/favorites", {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify({
+              name: data.Search.Title,
+              oid: data.Search.name
+            })
+          })
         })        
 }
 
+function displayResults(title, poster, oid, year){
+ return (`
+        <div class='movies'>
+          <div class='movieHeader'>
+            <h1>${title}</h1>
+            <button id="favorite">Fave</button>
+            <img class='poster' src=${poster}>
+          </div>
+          <div  id='details'>
+            <button onclick='displayMovieDetails("${oid}")'>
+              Click here for more details.
+            </button>
+            <p>${year}, Imdb ID: ${oid}</p>
+          <div>
+        </div>
+      `)
+}
