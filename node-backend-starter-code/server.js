@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'views')))
 
+
 //route handlers
 app.use('/', indexRouter)
 

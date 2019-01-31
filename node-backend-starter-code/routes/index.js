@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path')
 const db = require('../data.json');
 const fs = require('fs');
+router.use(express.static(path.join(__dirname, '/public')))
 
 
 
@@ -14,7 +15,7 @@ router.post('/favorites', function(req, res){
   console.log('works here')
   var data = JSON.parse(fs.readFileSync('../data.json'));
   data.push(req.body);
-  fs.writeFile('./data.json', JSON.stringify(data));
+  fs.writeFile(db, JSON.stringify(data));
   res.setHeader('Content-Type', 'application/json');
   res.send(data);
 });
