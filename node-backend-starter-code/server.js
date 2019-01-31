@@ -18,7 +18,8 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'views')))
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 
 //route handlers
@@ -27,6 +28,8 @@ app.use('/', indexRouter)
 //views
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
+
+
 //start server
 app.set('port', process.env.PORT || 3000)
 let server = app.listen(app.get('port'), () => {

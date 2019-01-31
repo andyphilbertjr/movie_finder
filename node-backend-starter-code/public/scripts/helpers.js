@@ -34,7 +34,7 @@ form.addEventListener('submit' ,function(e){
 
 function addFave(data = ``){
   document.getElementById('favorite').addEventListener('click', () => {
-    return fetch("/favorites", {
+    return fetch('/favorites', {
             method: "POST",
             headers: { "Content-Type": "application/json; charset=utf-8" },
             body: JSON.stringify(data)
