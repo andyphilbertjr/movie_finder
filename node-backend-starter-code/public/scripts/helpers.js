@@ -1,5 +1,3 @@
-import { fstat } from "fs";
-
 const Api_Key = 'cd37cf2f'
 let url = `http://www.omdbapi.com/?apikey=${Api_Key}&`
 const form = document.querySelector('form')
