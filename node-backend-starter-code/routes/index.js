@@ -4,27 +4,29 @@ const path = require('path')
 const fs = require('fs');
 
 // data 
-let db = require('../data.json');
-const data = fs.readFileSync('data.json')
-const favoriteMovies = JSON.parse(data)
+const db = require('../data.json');
 
 
 router.use(express.static(path.join(__dirname, 'views')))
 
 router.get('/', (req, res) => {
-  console.log(favoriteMovies)
   res.render('index')
 })
 
 router.post('/favorites', addToDB);
 
-router.get('/favorites',  );
+router.get('/favorites',  getData);
 
 module.exports = router
 
 
 function addToDB(request, response){
+  let data = fs.writeFile('data.json', JSON.stringify(request.body), ()=>   console.log('file added'))
+  response.send(data)
+}
 
-  fs.writeFile('data.json', JSON.stringify(request.body), ()=>   console.log(request.body))
-
+function getData(request, response){
+  let data = fs.readFileSync('data.json')
+  let favoriteMovies = JSON.parse(data)
+  response.json(favoriteMovies)
 }
