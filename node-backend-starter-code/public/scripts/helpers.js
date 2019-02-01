@@ -1,8 +1,9 @@
+import { fstat } from "fs";
+
 const Api_Key = 'cd37cf2f'
 let url = `http://www.omdbapi.com/?apikey=${Api_Key}&`
 const form = document.querySelector('form')
 const results = document.querySelector('.results')
-const movies = document.querySelectorAll('.movies')
 
 
 function displayMovieDetails(key){
