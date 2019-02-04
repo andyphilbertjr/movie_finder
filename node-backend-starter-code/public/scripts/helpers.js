@@ -5,10 +5,10 @@ const results = document.querySelector('.results')
 
 
 function displayMovieDetails(key){
-  return fetch(`${url}i=${key}`)
+  return fetch(`${url}i=${key}&plot=full`)
           .then(response => response.json())
           .then( data => {
-            document.getElementById('details').insertAdjacentHTML('beforeend',
+            document.getElementById(key).insertAdjacentHTML('beforeend',
             `<div class='movieDetails'>${data.Plot}<div>`
             )
           })
@@ -41,19 +41,21 @@ function addFave(data = ``){
         })    
 }
 
-function displayResults(title, poster, oid, year){
+function displayResults(title, poster, id, year){
  return (`
         <div class='movies'>
           <div class='movieHeader'>
-            <h1>${title}</h1>
+            <h1 class='movieTitles'>${title}</h1>
             <button id="favorite">Fave</button>
+          </div>
+          <div>
             <img class='poster' src=${poster}>
           </div>
-          <div  id='details'>
-            <button onclick='displayMovieDetails("${oid}")'>
+          <div  id=${id}>
+            <button onclick='displayMovieDetails("${id}")'>
               Click here for more details.
             </button>
-            <p>${year}, Imdb ID: ${oid}</p>
+            <p>${year}, Imdb ID: ${id}</p>
           <div>
         </div>
       `)

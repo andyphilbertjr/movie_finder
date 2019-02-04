@@ -17,7 +17,7 @@ module.exports = router
 
 //add a favorited movie to data.json file 
 function addToDB(request, response, next){
-   if(!req.body.Title || !req.body.imdbID) res.send("Error")
+   if(!request.body.Title || !request.body.imdbID) response.send("Error")
   let movie = JSON.stringify(request.body)
   let data = JSON.parse(fs.readFileSync('data.json', ["Title", "Poster", "imdbID"]));
   data.push(movie)
