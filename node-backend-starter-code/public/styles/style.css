@@ -2,6 +2,9 @@
   body .results {
     display: inline-block;
   }
+  .movies{
+    width: 100%;
+  }
 }
 
 body{
@@ -54,12 +57,13 @@ form{
   flex-flow: row wrap;
 }
 .movies{
-  box-sizing: content-box;
   margin: 10px;
   width: 30vw;
+  height: auto;
   border: solid 2px #e2d3aa;
   border-radius: 10px;
 }
+
 .movieHeader{
   display: inline-flex;
   border-bottom: solid 2px #014d87;
@@ -72,6 +76,9 @@ form{
 .poster{
   width: 100%;
   height: 70vh;
+}
+.detailsButton{
+  background-color: aquamarine;
 }
 #favorite{
   background-color: #014d87;
