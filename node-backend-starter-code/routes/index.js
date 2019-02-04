@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs');
 
 // data 
-const db = 'data.json[faves]' ;
+
 
 
 router.use(express.static(path.join(__dirname, 'views')))
@@ -20,14 +20,33 @@ router.get('/favorites',  getData);
 module.exports = router
 
 function addToDB(request, response, next){
-  let movie = JSON.stringify(request.body, null, 2)
-  fs.appendFile('data.json', ',' + movie, () => console.log('movie added'))
-  response.send(movie)
-  next()
+  let movie = request.body
+  var data = JSON.parse(fs.readFileSync('data.json'));
+  data.push(JSON.stringify(movie))
+  fs.writeFile('data.json', JSON.stringify(data, null, 2), () => console.log('movie added'))
+  response.send(data)
 }
 
 function getData(request, response){
-  let data = fs.readFile('data.json')
-  console.log(data)
+ // let data = fs.readFile('data.json')
+ // console.log(data)
   response.json(data)
 }
+
+
+// app.get('/favorites', function(req, res){
+//   var data = fs.readFileSync('./data.json');
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(data);
+// ;
+
+// app.get('favorites', function(req, res){
+//   if(!req.body.name || !req.body.oid){
+//     res.send("Error");
+//     return
+  
+
+//   fs.writeFile('./data.json', JSON.stringify(data));
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(data);
+// });

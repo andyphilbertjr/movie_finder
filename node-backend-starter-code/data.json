@@ -1,3 +1,7 @@
-{
-  "faves": []
-}
+[
+  "{\"Title\":\"I Saw the Sun\",\"Year\":\"2009\",\"imdbID\":\"tt1347521\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BODU1ZWU4MGMtOGJhYS00Y2Q1LTkxZTUtNjU4YzgzZDFmMWZkXkEyXkFqcGdeQXVyMzUxOTQ2NDU@._V1_SX300.jpg\"}",
+  "{\"Title\":\"Saw 3D: The Final Chapter\",\"Year\":\"2010\",\"imdbID\":\"tt1477076\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjI0NTEwNTgwNF5BMl5BanBnXkFtZTcwMDM5MTU5Mw@@._V1_SX300.jpg\"}",
+  "{\"Title\":\"Cruel Jaws\",\"Year\":\"1995\",\"imdbID\":\"tt0112747\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNDE2NTIzMjUtOTQ4ZC00ZWRlLTllZDAtNzZlNzRhNTRiNzA4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg\"}",
+  "{\"Title\":\"Mako: The Jaws of Death\",\"Year\":\"1976\",\"imdbID\":\"tt0074845\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BODJiZmI1Y2ItMjBiNS00NGU0LTk2NmQtNGQ0YmVkYjNiNjlmXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg\"}",
+  "{\"Title\":\"Jaws in Japan\",\"Year\":\"2009\",\"imdbID\":\"tt1786635\",\"Type\":\"movie\",\"Poster\":\"https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxMzc3OTkyNV5BMl5BanBnXkFtZTcwMDA0NzMwNw@@._V1_SX300.jpg\"}"
+]
